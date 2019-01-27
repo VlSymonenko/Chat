@@ -14,7 +14,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "heroku-postbuild": "cd backend && node server "
+    "heroku-postbuild": "npm install socket.io && cd backend && node server "
   },
   "eslintConfig": {
     "extends": "react-app"
