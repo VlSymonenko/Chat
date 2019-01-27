@@ -12,6 +12,7 @@
   "dependencies": {
     "email-verifier": "^0.4.1",
     "express-validator": "^5.3.1",
-    "mongodb": "^3.1.13"
+    "mongodb": "^3.1.13",
+    "nodemailer": "^5.1.1"
   }
 }

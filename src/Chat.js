@@ -14,29 +14,24 @@ class Chat extends React.Component{
             day:'',
             message: '',
             messages: []
-        };
+          };
 
         this.socket = io('localhost:8080');
-
         this.socket.on('RECEIVE_MESSAGE', function(data){
             addMessage(data);
-        });
-      const addMessage = data => {
-                    console.log(data);
-                    let time = new Date();
-                    this.setState({messages: [...this.state.messages, data] , data : time.toLocaleTimeString() });
-                    console.log(this.state.messages);
-                };
+          });
+
+      const addMessage = data =>this.setState({messages: [...this.state.messages, data ]});
 
         this.sendMessage = ev => {
             ev.preventDefault();
-            this.socket.emit('SEND_MESSAGE', {
-                author: this.state.username,
-                email:this.state.email,
-                date:this.state.data,
-                message: this.state.message
+              this.CreatePost();
+                this.socket.emit('SEND_MESSAGE', {
+                  author: this.state.username,
+                  email:this.state.email,
+                  date:this.state.day,
+                  message: this.state.message
             });
-            this.CreatePost();
             this.setState({message: ''});
         }
 
@@ -45,7 +40,6 @@ class Chat extends React.Component{
         axios.post('http://localhost:8080/user', querystring.stringify({ name : this.state.username , message : this.state.message , email:this.state.email , date:dateInfo.toString()}));
       }
 }
-
     render(){
         return (
             <div className="container">
@@ -53,18 +47,18 @@ class Chat extends React.Component{
                     <div className="col-4">
                         <div className="card">
                             <div className="card-body">
-                                <div className="card-title">Global Chat</div>
+                              <div className="card-title">Global Chat</div>
                                 <hr/>
                                 <div className="messages">
                                     {this.state.messages.map(message => {
                                         return (
                                             <div>
-                                              {message.author} : {message.message} , Posted at : {message.date}
+                                              {message.author} : {message.message}
                                             </div>
                                         )
                                     })}
                                 </div>
-                            </div>
+                              </div>
                             <div className="card-footer">
                                 <input type="text" placeholder="Username" value={this.state.username} onChange={ev => this.setState({username: ev.target.value})} className="form-control"/>
                                 <br/>
@@ -74,7 +68,7 @@ class Chat extends React.Component{
                                 <br/>
                                 <button onClick={this.sendMessage} className="btn btn-primary form-control">Send</button>
 
-                          </div>
+                            </div>
                         </div>
                     </div>
                 </div>
