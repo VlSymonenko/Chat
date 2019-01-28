@@ -32,6 +32,8 @@ We have user interface on http://localhost:3000 and server on http://localhost:8
 
 To see all data (in console ) that was saved you need to include findDocs function into server.js from db.js module and deleteAllData if you want to delete all data from your db. When we push Send button at UI we automatically create POST request to http://localhost:8080/user and if it have email and name that fits our validation rules it will be saved in your db and you will receive special message in your comand promt. If we want to receive a single message by special id we go to http://localhost:8080/api/messages/single/{yourSpecialId} and assign yourSpecialId. If we want to receive all messages with pagination by 10 we go to http://localhost:8080/api/messages/list/{paginationID} and assign paginationID. For example 2 will output messages from 20th to 30th.Also if you want to have only messages text just see comments in special method at db.js.
 
+#### Deploy to Heroku
+Server side is working but client side don't becouse of node modules witch are can't download . So to test it you need to delete client folder and do post request to http://localhost:8080/user with using e.x. postman.Also you need to delete "heroku-postbuild": "cd client && npm start " and comas after "start" script in package.json.
 ### Todos
  - Optimise Code
  - Write MORE Tests
